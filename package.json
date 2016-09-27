@@ -1,0 +1,22 @@
+{
+  "name": "Message",
+  "version": "0.0.1",
+  "description": "Autodestruction Msg System",
+  "dependencies": {
+    "aes-js": "^2.0.0",
+    "auto-sni": "^1.4.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.10.2",
+    "le-acme-core": "^2.0.6",
+    "le-challenge-fs": "^2.0.4",
+    "le-sni-auto": "^2.0.1",
+    "le-store-certbot": "^2.0.3",
+    "letsencrypt": "^2.1.5",
+    "letsencrypt-express": "^2.0.2",
+    "redirect-https": "^1.1.0",
+    "require-https": "^1.1.1",
+    "uniq": "^1.0.1",
+    "xml2js": "^0.4.16"
+  }
+}

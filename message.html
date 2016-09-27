@@ -1,0 +1,79 @@
+<title>Self-destructing encrypted messages</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/ricmoo/aes-js/master/index.js"></script>
+<script type="text/javascript" src="https://rawgit.com/nevins-b/javascript-bcrypt/master/bCrypt.js"></script>
+<script type="text/javascript" src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.js"></script>
+<script type="text/javascript" src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<script type="text/javascript" src="/scripts"></script>
+<script type="text/javascript" src="/lib/linedtextarea"></script>
+<script type="text/javascript" src="/lib/qrcode"></script>
+
+<meta name="description" content="This is an example of a meta description. This will often show up in search results.">
+
+<noscript>
+<meta http-equiv="refresh" content="0;url=/ups">
+</noscript>
+
+<link rel="stylesheet" type="text/css" href="/style/linedtextarea">
+<link rel="stylesheet" type="text/css" href="/style/main">
+<link rel="stylesheet" type="text/css" href="/style/dropzone">
+
+
+<div id="header">
+<a href="/"><h1 style="float:left;">Cryptob.in </h1></a>
+<img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="https://developer.atlassian.com/stash/docs/latest/images/home/section-rest.png">
+<a href="http://www.reddit.com/r/cryptobin" target="_blank"><img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="/images/reddit"></a>
+<img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="/images/bitcoin" onclick="btcToggle()">
+
+
+<div style="float:right;margin-top:30px;margin-right:4%;"> 
+	<form action="/load-image" method="post" enctype="multipart/form-data">
+		<label class="button myLabel"> Load from file
+		<input type="file" name="image" class="filestyle button" value="Load image" onchange="this.form.submit()"> 
+		</label>	
+	</form>
+</div>
+
+</div>
+
+<div id="main" >
+<div id="error" style="display:none;"></div><br/>
+<div id="msgField">
+<textarea maxlength="1024" style="border:none;margin-top:0;" id="msg" class="wrap" placeholder="<encrypted>" disabled></textarea>
+</div>
+<div id="files" style="display:none;height:300px;" class="wrap"></div>
+
+</div>
+
+
+<div id="footer-left">
+
+<iframe data-aa='227904' src='//ad.a-ads.com/227904?size=125x125&background_color=f2f2f2' scrolling='no' style='width:125px; height:125px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
+</div>
+
+<div id="footer-right"></div>
+
+
+
+<script>
+	$("#msg").linedtextarea();
+	
+	
+	var jsonURL = "/json/m/" + window.location.pathname.split("/m/")[1];
+	var jqxhr 	= $.getJSON( jsonURL, null).success( function() { 
+		
+		if(jqxhr.responseJSON.result == "ok"){
+
+			$("#msg").val(jqxhr.responseJSON.msg);
+			$("#files").html(jqxhr.responseJSON.files);
+			$("#checksum").html(jqxhr.responseJSON.checksum);	
+			var password = prompt("Enter password");
+			getHashDec (password, returnHashDec);
+		} else {
+			$("#error").html("Message with this ID does not exist :(");
+			$("#error").show();
+		}
+	} );
+	
+</script>

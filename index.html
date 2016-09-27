@@ -1,0 +1,97 @@
+<title>Self-destructing encrypted messages</title>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://rawgit.com/ricmoo/aes-js/master/index.js"></script>
+<script type="text/javascript" src="https://rawgit.com/nevins-b/javascript-bcrypt/master/bCrypt.js"></script>
+<script type="text/javascript" src="https://rawgit.com/eligrey/FileSaver.js/master/FileSaver.js"></script>
+<script type="text/javascript" src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
+<script type="text/javascript" src="/scripts"></script>
+<script type="text/javascript" src="/lib/linedtextarea"></script>
+<script type="text/javascript" src="/lib/qrcode"></script>
+<script type="text/javascript" src="https://bitwiseshiftleft.github.io/sjcl/sjcl.js"></script>
+
+
+<meta name="description" content="Share encrypted messages and files safely.">
+
+<noscript>
+<meta http-equiv="refresh" content="0;url=/ups">
+</noscript>
+
+<link rel="stylesheet" type="text/css" href="/style/linedtextarea">
+<link rel="stylesheet" type="text/css" href="/style/main">
+<link rel="stylesheet" type="text/css" href="/style/dropzone">
+
+
+<div id="header">
+<a href="/"><h1 style="float:left;">Cryptob.in </h1></a>
+<img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="https://developer.atlassian.com/stash/docs/latest/images/home/section-rest.png">
+<a href="http://www.reddit.com/r/cryptobin" target="_blank"><img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="/images/reddit"></a>
+
+<img id="img-op" style="margin-left:5px;height:30px;margin-top:30px;" src="/images/bitcoin" onclick="btcToggle()">
+
+
+<div style="float:right;margin-top:30px;margin-right:4%;"> 
+	<form action="/load-image" method="post" enctype="multipart/form-data">
+		<label class="button myLabel"> Load from file
+		<input type="file" name="image" class="filestyle button" value="Load image" onchange="this.form.submit()"> 
+		</label>	
+	</form>
+</div>
+
+</div>
+<div style=""> 
+<div id="options"> 
+<h2> Options </h2>
+<p> File as message ID </p>
+	<div style="float:left;">
+
+		<label class="button myLabel"> Upload file
+		<input type="file" id="imageID" class="filestyle button" value="Load image" onchange="checkID()"> 
+		</label>	
+
+
+
+
+	</div>
+<div id="id" style="display:none"></div>
+<div id="base64" style="display:none"></div>
+<div id="id-status"></div>
+</div>
+<div id="main" >
+<div id="hash"></div>
+<div id="generate"></div><br/>
+<div id="again"><a href="/"><button style="width:100%;" class="button">Create new cryptobin</button></a></div>
+<div id="msgField">
+<div id="toolbar">
+Password  <input type="password" size="15" id="password"> destroy after   
+<select id="views">
+<option value="0">∞</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+</select> views  
+<button onclick="generate()" class="button" type="submit">Generate</button>
+</div>
+
+
+<textarea maxlength="1024" id="msg" placeholder="Enter message here"></textarea>
+Characters: <span id="count">0 </span> / 1024
+</div>
+
+</div>
+<div id="upload" class="dropzone-style">
+<div id="upload_msg">Drag and drop files here (max 3 files, 1 MB each)</div>
+</div>
+
+
+<!-- wrapper --> </div>
+
+
+<div id="footer-left">
+<iframe data-aa='227904' src='//ad.a-ads.com/227904?size=125x125&background_color=f2f2f2' scrolling='no' style='width:125px; height:125px; border:0px; padding:0;overflow:hidden' allowtransparency='true'></iframe>
+
+
+<div id="footer-right"></div>
+
